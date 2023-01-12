@@ -149,7 +149,7 @@ class materialsController extends Controller
             if(isset($material)){
                 $material->delete();
     
-                $this->estructura_api->setEstado('SUC-001', 'sucesss', 'Material eliminado Correctamente');
+                $this->estructura_api->setEstado('SUC-001', 'success', 'Material eliminado Correctamente');
             }else{
                 $this->estructura_api->setEstado('ERR-000', 'error', 'Material no Encontrado');
                 $this->estructura_api->setResultado(null);

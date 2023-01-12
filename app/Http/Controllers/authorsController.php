@@ -104,7 +104,7 @@ class authorsController extends Controller
             if(isset($author)){
                 $author->delete();
     
-                $this->estructura_api->setEstado('SUC-001', 'sucesss', 'Autor eliminado Correctamente');
+                $this->estructura_api->setEstado('SUC-001', 'success', 'Autor eliminado Correctamente');
             }else{
                 $this->estructura_api->setEstado('ERR-000', 'error', 'Autor no Encontrado');
                 $this->estructura_api->setResultado(null);

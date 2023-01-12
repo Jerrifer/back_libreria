@@ -98,7 +98,7 @@ class typeMaterialsController extends Controller
             if(isset($tipomaterial)){
                 $tipomaterial->delete();
     
-                $this->estructura_api->setEstado('SUC-001', 'sucesss', 'Tipo de material eliminado Correctamente');
+                $this->estructura_api->setEstado('SUC-001', 'success', 'Tipo de material eliminado Correctamente');
             }else{
                 $this->estructura_api->setEstado('ERR-000', 'error', 'Tipo de material no Encontrado');
                 $this->estructura_api->setResultado(null);

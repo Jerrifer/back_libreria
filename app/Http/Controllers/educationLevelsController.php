@@ -104,7 +104,7 @@ class educationLevelsController extends Controller
             if(isset($education_level)){
                 $education_level->delete();
     
-                $this->estructura_api->setEstado('SUC-001', 'sucesss', 'Nivel educativo eliminado Correctamente');
+                $this->estructura_api->setEstado('SUC-001', 'success', 'Nivel educativo eliminado Correctamente');
             }else{
                 $this->estructura_api->setEstado('ERR-000', 'error', 'Nivel educativo no Encontrado');
                 $this->estructura_api->setResultado(null);

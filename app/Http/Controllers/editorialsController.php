@@ -113,7 +113,7 @@ class editorialsController extends Controller
             if(isset($editorial)){
                 $editorial->delete();
     
-                $this->estructura_api->setEstado('SUC-001', 'sucesss', 'Editorial eliminado Correctamente');
+                $this->estructura_api->setEstado('SUC-001', 'success', 'Editorial eliminado Correctamente');
             }else{
                 $this->estructura_api->setEstado('ERR-000', 'error', 'Editorial no Encontrado');
                 $this->estructura_api->setResultado(null);

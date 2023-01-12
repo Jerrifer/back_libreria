@@ -116,7 +116,7 @@ class usersController extends Controller
             if(isset($user)){
                 $user->delete();
     
-                $this->estructura_api->setEstado('SUC-001', 'sucesss', 'Usuario eliminado Correctamente');
+                $this->estructura_api->setEstado('SUC-001', 'success', 'Usuario eliminado Correctamente');
             }else{
                 $this->estructura_api->setEstado('ERR-000', 'error', 'Usuario no Encontrado');
                 $this->estructura_api->setResultado(null);
