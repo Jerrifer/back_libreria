@@ -26,14 +26,14 @@ class authorsController extends Controller
     public function store(Request $request) {
 
         $validations = Validator::make($request->all(), [
-            'name' => 'required'
+            'name_author' => 'required'
         ]);
    
    
            if(!$validations->fails()){
 
                $author= new Author();
-               $author->name  = $request ->name;
+               $author->name_author  = $request ->name_author;
                $author->save();
    
                $this->estructura_api->setResultado($author);
@@ -70,7 +70,7 @@ class authorsController extends Controller
     public function update(Request $request, $id_author) {
 
         $validations = Validator::make($request->all(), [
-            'name' => 'required'
+            'name_author' => 'required'
         ]);
 
         if (!$validations->fails()) {
@@ -78,7 +78,7 @@ class authorsController extends Controller
 
            if (isset($author)) {
 
-            $author->name  = $request ->name;
+            $author->name_author  = $request ->name_author;
 
             $author->save();
 

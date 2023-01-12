@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\authorsController;
 use App\Http\Controllers\editorialsController;
 use App\Http\Controllers\educationLevelsController;
+use App\Http\Controllers\material_userController;
 use App\Http\Controllers\materialsController;
 use App\Http\Controllers\typeMaterialsController;
 use App\Http\Controllers\usersController;
@@ -60,3 +62,14 @@ Route::post('educationlevels', [educationLevelsController::class, 'store']);
 Route::get('educationlevels/{id_educationlevel}', [educationLevelsController::class, 'show']);
 Route::put('educationlevels/{id_educationlevel}', [educationLevelsController::class, 'update']);
 Route::delete('educationlevels/{id_educationlevel}', [educationLevelsController::class, 'destroy']);
+
+//Autores
+Route::get('authors', [authorsController::class, 'index']);
+Route::post('authors', [authorsController::class, 'store']);
+Route::get('authors/{id_author}', [authorsController::class, 'show']);
+Route::put('authors/{id_author}', [authorsController::class, 'update']);
+Route::delete('authors/{id_author}', [authorsController::class, 'destroy']);
+
+//Material - User
+Route::get('materialuser', [material_userController::class, 'index']);
+Route::post('materialuser', [material_userController::class, 'store']);

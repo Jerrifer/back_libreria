@@ -27,8 +27,11 @@ class usersController extends Controller
 
         $validations = Validator::make($request->all(), [
             'name' => 'required',
+            'lastname' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'phone_number' => 'required',
+
         ]);
    
    
@@ -36,8 +39,11 @@ class usersController extends Controller
 
                $user= new User;
                $user->name  = $request ->name;
+               $user->lastname  = $request ->lastname;
                $user->email  = $request ->email;
                $user->password  = $request ->password;
+               $user->phone_number  = $request ->phone_number;
+
             
                $user->save();
    
@@ -71,8 +77,10 @@ class usersController extends Controller
 
         $validations = Validator::make($request->all(), [
             'name' => 'required',
+            'lastname' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'phone_number' => 'required',
         ]);
 
         if (!$validations->fails()) {
@@ -81,16 +89,18 @@ class usersController extends Controller
            if (isset($user)) {
 
             $user->name  = $request ->name;
+            $user->lastname  = $request ->lastname;
             $user->email  = $request ->email;
             $user->password  = $request ->password;
+            $user->phone_number  = $request ->phone_number;
 
             $user->save();
 
 
                $this->estructura_api->setResultado([$user]);
-               $this->estructura_api->setEstado('SUC-001', 'success', 'Lugar Actualizado correctamente');
+               $this->estructura_api->setEstado('SUC-001', 'success', 'Usuario Actualizado correctamente');
            } else {
-               $this->estructura_api->setEstado('ERR-000', 'error', 'no existe este Lugar');
+               $this->estructura_api->setEstado('ERR-000', 'error', 'no existe este Usuario');
            }
         } else {
             $this->estructura_api->setEstado('ERR-000', 'error', $validations->errors());

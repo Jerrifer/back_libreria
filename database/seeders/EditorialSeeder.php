@@ -17,7 +17,7 @@ class EditorialSeeder extends Seeder
     {
         $editorial = new Editorial();
 
-        $editorial->name ="editorial 1";
+        $editorial->name_editorial ="editorial 1";
 
         $editorial->save();
     }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id('id_material');
-            $table->string('name');
+            $table->string('name_material');
             $table->unsignedBigInteger('type_material_id');
             $table->unsignedBigInteger('editorial_id');
  

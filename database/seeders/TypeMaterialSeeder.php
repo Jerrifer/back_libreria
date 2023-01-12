@@ -17,7 +17,7 @@ class TypeMaterialSeeder extends Seeder
     {
         $typeMaterial = new TypeMaterial();
 
-        $typeMaterial->name ="tipo material 1";
+        $typeMaterial->name_type ="tipo material 1";
 
         $typeMaterial->save();
     }

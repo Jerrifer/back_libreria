@@ -27,14 +27,14 @@ class typeMaterialsController extends Controller
     public function store(Request $request) {
 
         $validations = Validator::make($request->all(), [
-            'name' => 'required'
+            'name_type' => 'required'
         ]);
    
    
            if(!$validations->fails()){
 
                $typeMaterial= new TypeMaterial;
-               $typeMaterial->name  = $request ->name;
+               $typeMaterial->name_type  = $request ->name_type;
                $typeMaterial->save();
    
                $this->estructura_api->setResultado($typeMaterial);
@@ -66,7 +66,7 @@ class typeMaterialsController extends Controller
     public function update(Request $request, $id_tipomaterial) {
 
         $validations = Validator::make($request->all(), [
-            'name' => 'required'
+            'name_type' => 'required'
         ]);
 
         if (!$validations->fails()) {
@@ -74,7 +74,7 @@ class typeMaterialsController extends Controller
 
            if (isset($tipomaterial)) {
 
-            $tipomaterial->name  = $request ->name;
+            $tipomaterial->name_type  = $request ->name_type;
 
             $tipomaterial->save();
 

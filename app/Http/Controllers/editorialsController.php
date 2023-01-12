@@ -7,6 +7,7 @@ use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class editorialsController extends Controller
 {
@@ -28,14 +29,14 @@ class editorialsController extends Controller
     public function store(Request $request) {
 
         $validations = Validator::make($request->all(), [
-            'name' => 'required'
+            'name_editorial' => 'required'
         ]);
    
    
            if(!$validations->fails()){
 
                $editorial= new Editorial();
-               $editorial->name  = $request ->name;
+               $editorial->name_editorial  = $request ->name_editorial;
                $editorial->save();
    
                $this->estructura_api->setResultado($editorial);
@@ -57,11 +58,11 @@ class editorialsController extends Controller
     
         if(isset($editorial)){
             
-            $material = Material::where('editorial_id', $id_editorial)->first();
-        
+            $material = Material::where('editorial_id', $id_editorial)->get();
+
             $editorial = Arr::add($editorial, 'material', $material);
 
-            $this->estructura_api->setResultado($editorial, $material);
+            $this->estructura_api->setResultado($editorial);
         }else{
 
             $this->estructura_api->setEstado('INF-001', 'INF', 'No se encontro el editorial');
@@ -78,7 +79,7 @@ class editorialsController extends Controller
     public function update(Request $request, $id_editorial) {
 
         $validations = Validator::make($request->all(), [
-            'name' => 'required'
+            'name_editorial' => 'required'
         ]);
 
         if (!$validations->fails()) {
@@ -86,7 +87,7 @@ class editorialsController extends Controller
 
            if (isset($editorial)) {
 
-            $editorial->name  = $request ->name;
+            $editorial->name_editorial  = $request ->name_editorial;
 
             $editorial->save();
 

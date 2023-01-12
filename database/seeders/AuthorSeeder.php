@@ -17,7 +17,7 @@ class AuthorSeeder extends Seeder
     {
         $author = new Author();
 
-        $author->name ="author 1";
+        $author->name_author ="author 1";
 
         $author->save();
     }
