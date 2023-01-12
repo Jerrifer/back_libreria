@@ -20,11 +20,15 @@ class Material extends Model
         return $this->belongsTo(Editorial::class);
     }
 
-    public function educationLevel(){
-        return $this->belongsTo(EducationLevel::class);
+    public function educationLevelMaterial(){
+        return $this->hasMany(EducationLevelMaterial::class);
     }
 
-    public function User(){
-        return $this->belongsTo(User::class);
+    public function materialUser(){
+        return $this->hasMany(MaterialUser::class);
+    }
+
+    public function authorMaterial(){
+        return $this->hasMany(AuthorMaterial::class);
     }
 }

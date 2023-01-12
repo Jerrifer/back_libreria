@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EducationLevelSeeder::class);
         $this->call(TypeMaterialSeeder::class);
         $this->call(EditorialSeeder::class);
+        $this->call(AuthorSeeder::class);
         $this->call(MaterialSeeder::class);
 
     }

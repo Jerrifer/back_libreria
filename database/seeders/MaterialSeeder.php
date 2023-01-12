@@ -19,10 +19,8 @@ class MaterialSeeder extends Seeder
 
         $material->name ="material 1";
         $material->name ="material 1";
-        $material->user_id = 1;
         $material->type_material_id = 1;
         $material->editorial_id = 1;
-        $material->education_level_id = 1;
 
 
         $material->save();

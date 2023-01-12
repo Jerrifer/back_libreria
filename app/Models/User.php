@@ -15,8 +15,9 @@ class User extends Authenticatable
     protected $table = "users";
     protected $primaryKey = "id_user";
 
-    public function materials(){
-        return $this->hasMany('App\Models\Material','material_id','id_material');
+    public function materialUser(){
+        return $this->hasMany(MaterialUser::class);
+
     }
 
     /**

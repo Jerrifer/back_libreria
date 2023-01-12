@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Editorial;
+use App\Models\Material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class editorialsController extends Controller
@@ -51,9 +53,15 @@ class editorialsController extends Controller
 
     public function show($id_editorial) {
         $editorial = Editorial::where('id_editorial', $id_editorial)->first();
-        if(isset($editorial)){
 
-            $this->estructura_api->setResultado($editorial);
+    
+        if(isset($editorial)){
+            
+            $material = Material::where('editorial_id', $id_editorial)->first();
+        
+            $editorial = Arr::add($editorial, 'material', $material);
+
+            $this->estructura_api->setResultado($editorial, $material);
         }else{
 
             $this->estructura_api->setEstado('INF-001', 'INF', 'No se encontro el editorial');

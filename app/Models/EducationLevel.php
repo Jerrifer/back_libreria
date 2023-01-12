@@ -12,7 +12,7 @@ class EducationLevel extends Model
     protected $table = "education_levels";
     protected $primaryKey = "id_education_level";
 
-    public function materials(){
-        return $this->hasMany(Material::class);
+    public function educationLevelMaterial(){
+        return $this->hasMany(EducationLevelMaterial::class);
     }
 }

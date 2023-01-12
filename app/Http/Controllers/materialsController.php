@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuthorMaterial;
+use App\Models\Editorial;
+use App\Models\EducationLevelMaterial;
 use App\Models\Material;
+use App\Models\MaterialUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class materialsController extends Controller
 {
     public function index() {
         
-        $materials = Material::join('type_materials','type_material_id','id_type_material')
-        ->join('editorials','editorial_id','id_editorial')
-        ->join('education_levels','education_level_id','id_education_level')
-        ->join('users','user_id','id_user')
-        ->get();
+        $materials = Material::get();
 
         if (count($materials) > 0) {
             $this->estructura_api->setEstado('SUC-001', 'success', 'Materiales encontrados');
@@ -32,10 +34,11 @@ class materialsController extends Controller
 
         $validations = Validator::make($request->all(), [
             'name' => 'required',
-            'user_id' => 'required',
             'type_material_id' => 'required',
             'editorial_id' => 'required',
-            'education_level_id' => 'required'
+            'user_id' => 'required',
+            'author_id' => 'required',
+            'education_level_id' => 'required',
         ]);
    
    
@@ -43,12 +46,37 @@ class materialsController extends Controller
 
                $material= new Material();
                $material->name  = $request ->name;
-               $material->user_id  = $request ->user_id;
                $material->type_material_id  = $request ->type_material_id;
                $material->editorial_id  = $request ->editorial_id;
-               $material->education_level_id  = $request ->education_level_id;
 
                $material->save();
+
+
+               //education level - material
+               $educationLevelMaterial= new EducationLevelMaterial();
+
+               $educationLevelMaterial->material_id  = $material->id_material;
+               $educationLevelMaterial->education_level_id  = $request ->education_level_id;
+
+               $educationLevelMaterial->save();
+
+
+               //Author - material
+               $authorMaterial= new AuthorMaterial();
+               
+               $authorMaterial->material_id  = $material->id_material;
+               $authorMaterial->author_id  = $request ->author_id;
+
+               $authorMaterial->save();
+
+
+               //User - material
+               $educationLevelMaterial= new MaterialUser();
+               
+               $educationLevelMaterial->material_id  = $material->id_material;
+               $educationLevelMaterial->user_id  = $request ->user_id;
+
+               $educationLevelMaterial->save();
    
                $this->estructura_api->setResultado($material);
                $this->estructura_api->setEstado('SUC-001', 'success', 'Material Guardado Correctamente');
@@ -65,16 +93,20 @@ class materialsController extends Controller
 
     public function show($id_material) {
 
-        $material = Material::where('id_material', $id_material)->first();
+        $material= Material::where('id_material', $id_material)->first();
+
+        $editorial = Editorial::where('id_editorial', $material->editorial_id)->first();
+            // $out = new ConsoleOutput();
+            // $out->writeln('hola '.$editorial);
 
         if(isset($material)){
 
-            $material = Material::where('id_material', $id_material)->join('type_materials','type_material_id','id_type_material')
-            ->join('editorials','editorial_id','id_editorial')
-            ->join('education_levels','education_level_id','id_education_level')
-            ->join('users','user_id','id_user')
-            ->get();
+            
+            $material = Arr::add($material, 'editorial', $editorial);
+            
+
             $this->estructura_api->setResultado($material);
+
         }else{
 
             $this->estructura_api->setEstado('INF-001', 'INF', 'No se encontro el material');
@@ -92,10 +124,8 @@ class materialsController extends Controller
 
         $validations = Validator::make($request->all(), [
             'name' => 'required',
-            'user_id' => 'required',
             'type_material_id' => 'required',
             'editorial_id' => 'required',
-            'education_level_id' => 'required'
         ]);
 
         if (!$validations->fails()) {
@@ -104,10 +134,8 @@ class materialsController extends Controller
            if (isset($material)) {
 
             $material->name  = $request ->name;
-            $material->user_id  = $request ->user_id;
             $material->type_material_id  = $request ->type_material_id;
             $material->editorial_id  = $request ->editorial_id;
-            $material->education_level_id  = $request ->education_level_id;
 
             $material->save();
 
