@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\author_materialController;
 use App\Http\Controllers\authorsController;
 use App\Http\Controllers\editorialsController;
+use App\Http\Controllers\educationLevel_materialController;
 use App\Http\Controllers\educationLevelsController;
 use App\Http\Controllers\material_userController;
 use App\Http\Controllers\materialsController;
@@ -32,11 +34,11 @@ Route::post('login', [AuthController::class, 'login']);
 Route::group(['middleware' => ["auth:sanctum"]], function(){
 
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::get('users', [usersController::class, 'index']);
 
 });
 
 //Usuarios
+Route::get('users', [usersController::class, 'index']);
 Route::post('users', [usersController::class, 'store']);
 Route::get('users/{id_user}', [usersController::class, 'show']);
 Route::put('users/{id_user}', [usersController::class, 'update']);
@@ -84,3 +86,9 @@ Route::delete('authors/{id_author}', [authorsController::class, 'destroy']);
 //Material - User
 Route::get('materialuser', [material_userController::class, 'index']);
 Route::post('materialuser', [material_userController::class, 'store']);
+
+//Nivel educativo - Material
+Route::get('edlevelmaterials', [educationLevel_materialController::class, 'index']);
+
+//Author - Material
+Route::get('authormaterials', [author_materialController::class, 'index']);

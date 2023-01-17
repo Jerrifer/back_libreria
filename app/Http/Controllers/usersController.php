@@ -53,7 +53,7 @@ class usersController extends Controller
    
            }else{
                $this->estructura_api->setEstado('ERR-000', 'error', "Error al registrar por validaciones");
-               $this->estructura_api->setResultado([$validations->failed()]);
+               $this->estructura_api->setResultado($validations->failed());
            }
            return response()->json($this->estructura_api->toResponse(null));
    

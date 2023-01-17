@@ -19,6 +19,7 @@ class materialsController extends Controller
         $materials = Material::join('editorials', 'editorial_id', 'id_editorial')
         ->join('type_materials', 'type_material_id', 'id_type_material')->get();
 
+
         if (count($materials) > 0) {
             $this->estructura_api->setEstado('SUC-001', 'success', 'Materiales encontrados');
             $this->estructura_api->setResultado($materials);
@@ -39,7 +40,7 @@ class materialsController extends Controller
             'editorial_id' => 'required',
             'author_id' => 'required',
             'education_level_id' => 'required',
-            'document' => 'required',
+           // 'document' => 'required',
         ]);
    
    
@@ -50,8 +51,8 @@ class materialsController extends Controller
                $material->type_material_id  = $request ->type_material_id;
                $material->editorial_id  = $request ->editorial_id;
 
-               $material['document'] = time() . '_' . $request->file(key: 'document')->getClientOriginalName();
-               $request->file(key: 'document')->storeAs(path:'public/document_folder', name: $material['document']);
+            //    $material['document'] = time() . '_' . $request->file(key: 'document')->getClientOriginalName();
+            //    $request->file(key: 'document')->storeAs(path:'public/document_folder', name: $material['document']);
           
 
                $material->save();
@@ -119,7 +120,7 @@ class materialsController extends Controller
             'name_material' => 'required',
             'type_material_id' => 'required',
             'editorial_id' => 'required',
-            'document' => 'required',
+            //'document' => 'required',
         ]);
 
         if (!$validations->fails()) {
@@ -131,8 +132,8 @@ class materialsController extends Controller
             $material->type_material_id  = $request ->type_material_id;
             $material->editorial_id  = $request ->editorial_id;
 
-            $material['document'] = time() . '_' . $request->file(key: 'document')->getClientOriginalName();
-            $request->file(key: 'document')->storeAs(path:'public/document_folder', name: $material['document']);
+            // $material['document'] = time() . '_' . $request->file(key: 'document')->getClientOriginalName();
+            // $request->file(key: 'document')->storeAs(path:'public/document_folder', name: $material['document']);
 
             $material->save();
 
