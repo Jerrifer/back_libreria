@@ -17,7 +17,8 @@ class MaterialSeeder extends Seeder
     {
         $material = new Material();
 
-        $material->name_material ="material 1";
+        $material->name_material = "material 1";
+        $material->document = "";
         $material->type_material_id = 1;
         $material->editorial_id = 1;
 

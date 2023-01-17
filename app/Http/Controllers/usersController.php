@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class usersController extends Controller
@@ -28,7 +29,7 @@ class usersController extends Controller
         $validations = Validator::make($request->all(), [
             'name' => 'required',
             'lastname' => 'required',
-            'email' => 'required',
+            'email' => 'required | email | unique:users',
             'password' => 'required',
             'phone_number' => 'required',
 
@@ -41,7 +42,7 @@ class usersController extends Controller
                $user->name  = $request ->name;
                $user->lastname  = $request ->lastname;
                $user->email  = $request ->email;
-               $user->password  = $request ->password;
+               $user -> password = Hash::make( $request -> password);
                $user->phone_number  = $request ->phone_number;
 
             
@@ -52,7 +53,7 @@ class usersController extends Controller
    
            }else{
                $this->estructura_api->setEstado('ERR-000', 'error', "Error al registrar por validaciones");
-               $this->estructura_api->setResultado([]);
+               $this->estructura_api->setResultado([$validations->failed()]);
            }
            return response()->json($this->estructura_api->toResponse(null));
    

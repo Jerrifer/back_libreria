@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\authorsController;
 use App\Http\Controllers\editorialsController;
 use App\Http\Controllers\educationLevelsController;
@@ -25,12 +26,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', [AuthController::class, 'login']);
+
+
+Route::group(['middleware' => ["auth:sanctum"]], function(){
+
+    Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('users', [usersController::class, 'index']);
+
+});
+
 //Usuarios
-Route::get('users', [usersController::class, 'index']);
 Route::post('users', [usersController::class, 'store']);
 Route::get('users/{id_user}', [usersController::class, 'show']);
 Route::put('users/{id_user}', [usersController::class, 'update']);
 Route::delete('users/{id_user}', [usersController::class, 'destroy']);
+
 
 
 //Materiales
