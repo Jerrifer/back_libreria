@@ -40,8 +40,10 @@ class materialsController extends Controller
             'editorial_id' => 'required',
             'author_id' => 'required',
             'education_level_id' => 'required',
-           // 'document' => 'required',
+            'document' => 'required',
         ]);
+
+        
    
    
            if(!$validations->fails()){
@@ -51,8 +53,13 @@ class materialsController extends Controller
                $material->type_material_id  = $request ->type_material_id;
                $material->editorial_id  = $request ->editorial_id;
 
-            //    $material['document'] = time() . '_' . $request->file(key: 'document')->getClientOriginalName();
-            //    $request->file(key: 'document')->storeAs(path:'public/document_folder', name: $material['document']);
+               if($request->hasFile(key: 'document')){
+                    $material['document'] = time() . '_' . $request->file(key: 'document')->getClientOriginalName();
+                    $request->file(key: 'document')->storeAs(path:'public/document_folder', name: $material['document']);
+                    $material['document'] = 'C:/xampp/htdocs/back_libreria/storage/app/public/document_folder/' . $material['document'];
+                }
+
+                
           
 
                $material->save();

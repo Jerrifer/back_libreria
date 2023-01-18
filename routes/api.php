@@ -35,10 +35,14 @@ Route::group(['middleware' => ["auth:sanctum"]], function(){
 
     Route::get('logout', [AuthController::class, 'logout']);
 
+    Route::get('users', [usersController::class, 'index']);
+
+
+
+
 });
 
 //Usuarios
-Route::get('users', [usersController::class, 'index']);
 Route::post('users', [usersController::class, 'store']);
 Route::get('users/{id_user}', [usersController::class, 'show']);
 Route::put('users/{id_user}', [usersController::class, 'update']);
