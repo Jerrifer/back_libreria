@@ -56,7 +56,6 @@ class materialsController extends Controller
                if($request->hasFile(key: 'document')){
                     $material['document'] = time() . '_' . $request->file(key: 'document')->getClientOriginalName();
                     $request->file(key: 'document')->storeAs(path:'public/document_folder', name: $material['document']);
-                    $material['document'] = 'C:/xampp/htdocs/back_libreria/storage/app/public/document_folder/' . $material['document'];
                 }
 
                 
@@ -174,5 +173,16 @@ class materialsController extends Controller
 
         return response()->json($this->estructura_api->toResponse(null));
       
+    }
+
+
+    public function documentDownload($id_material) {
+
+        $material = Material::where('id_material', $id_material)->firstOrFail();
+
+        $download = storage_path('app/public/document_folder/'.$material->document);
+
+        return response()->file($download);
+
     }
 }
