@@ -105,6 +105,7 @@ class materialsController extends Controller
             $material = Material::where('id_material', $id_material)->join('editorials', 'editorial_id', 'id_editorial')
             ->join('type_materials', 'type_material_id', 'id_type_material')->get();
 
+            $this->estructura_api->setEstado('INF-001', 'success', 'EL material encontrado');
             $this->estructura_api->setResultado($material);
 
         }else{

@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get('downloadfile/{id_material}', [materialsController::class, 'documentDownload']);
+Route::get('materials/download/{id_material}', [materialsController::class, 'documentDownload']);
 
 
 
